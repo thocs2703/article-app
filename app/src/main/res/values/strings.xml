@@ -10,4 +10,16 @@
     <string name="poster_image">Poster Image</string>
     <string name="retry">Retry</string>
     <string name="search">Search</string>
+    <string name="begin_date">Begin Date</string>
+    <string name="sort_order">Sort Order</string>
+    <string name="news_desk_values">News Desk Values</string>
+    <string name="save">Save</string>
+    <string name="arts">Arts</string>
+    <string name="fashion_amp_style"><![CDATA[Fashion & Style]]></string>
+    <string name="sports">Sports</string>
+
+    <string-array name="sort_order">
+        <item>Oldest</item>
+        <item>Newest</item>
+    </string-array>
 </resources>

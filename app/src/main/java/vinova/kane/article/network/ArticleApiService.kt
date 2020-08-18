@@ -6,6 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 import vinova.kane.article.model.Article
 import vinova.kane.article.util.Constant
 
@@ -18,6 +19,7 @@ private val retrofit = Retrofit.Builder()
 interface ArticleApiService {
     @GET("articlesearch.json")
     suspend fun getArticleProperties(
+//        @QueryMap queryMap: Map<String, String>,
         @Query("q") query: String,
         @Query("page") pageNumber: Int,
         @Query("api-key") api_key: String = Constant.API_KEY

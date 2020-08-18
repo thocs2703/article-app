@@ -11,7 +11,7 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         android:id="@+id/search_bar"
         android:icon="@drawable/ic_search"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always|collapseActionView"
         android:title="@string/search">
     </item>
 </menu>

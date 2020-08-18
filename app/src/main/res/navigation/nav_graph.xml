@@ -8,7 +8,7 @@
     <fragment
         tools:layout="@layout/fragment_overview"
         android:id="@+id/overviewFragment"
-        android:name="vinova.kane.article.article.overview.OverviewFragment"
+        android:name="vinova.kane.article.ui.OverviewFragment"
         android:label="OverviewFragment" />
 
 </navigation>

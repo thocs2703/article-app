@@ -15,7 +15,7 @@ import java.io.IOException
 // 2. type of data loaded: List<Doc>
 // 3. where is data retrieved from: ArticleApiService
 
-private const val ARTICLE_STARTING_PAGE_INDEX = 1
+private const val ARTICLE_STARTING_PAGE_INDEX = 0
 
 class ArticlePagingSource(
     private val service: ArticleApiService,

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".article.overview.OverviewFragment">
+    tools:context=".ui.OverviewFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tool_bar"

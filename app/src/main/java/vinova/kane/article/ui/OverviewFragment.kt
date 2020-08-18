@@ -1,6 +1,7 @@
-package vinova.kane.article.article.overview
+package vinova.kane.article.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -17,11 +18,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import vinova.kane.article.R
 import vinova.kane.article.databinding.FragmentOverviewBinding
-import vinova.kane.article.ui.ArticleAdapter
-import vinova.kane.article.ui.ArticleLoadStateAdapter
-import vinova.kane.article.ui.IOnBackPressed
-import vinova.kane.article.ui.OverviewViewModel
 import vinova.kane.article.util.Injection
+import vinova.kane.article.util.OnSaveFilterListener
 
 @ExperimentalCoroutinesApi
 @ExperimentalPagingApi
@@ -37,14 +35,20 @@ class OverviewFragment : Fragment(), IOnBackPressed {
 
     private var searchJob: Job? = null
 
+    private var mDate:String?=""
+    private var mSort:String?=""
+    private var mNewDesk:String?=""
+
     private fun search(query: String) {
         // Make sure we cancel the previous job before creating a new one
         searchJob?.cancel()
         searchJob = lifecycleScope.launch {
             viewModel.searchArticle(query).collect {
                 adapter.submitData(it)
+                Log.d("OverviewFragment", "Adapter size: ${adapter.itemCount}")
             }
         }
+        Log.d("OverviewFragment", "Search Query: $query")
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -106,8 +110,26 @@ class OverviewFragment : Fragment(), IOnBackPressed {
                 return false
             }
         })
-
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.filter_bar){
+            val dialog= context?.let { FilterOptions(it,mDate,mSort,mNewDesk) }
+            dialog?.setSaveListener(object: OnSaveFilterListener {
+                override fun onItemClick(date: String, sort: String, newDesk: String) {
+                    mDate=date
+                    mSort=sort
+                    mNewDesk=newDesk
+                    dialog.dismiss()
+                }
+            })
+            fragmentManager?.let {
+                dialog?.show(it, "Filter Option")
+            }
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun initAdapter() {

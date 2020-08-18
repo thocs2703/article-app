@@ -1,5 +1,4 @@
-package vinova.kane.article.article
-
+package vinova.kane.article
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import vinova.kane.article.R
