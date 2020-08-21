@@ -9,6 +9,20 @@
         tools:layout="@layout/fragment_overview"
         android:id="@+id/overviewFragment"
         android:name="vinova.kane.article.ui.OverviewFragment"
-        android:label="OverviewFragment" />
+        android:label="OverviewFragment" >
+        <action
+            android:id="@+id/overview_nav_filter"
+            app:destination="@id/filterOptions" />
+    </fragment>
+
+    <dialog
+        tools:layout="@layout/filter_dialog"
+        android:id="@+id/filterOptions"
+        android:name="vinova.kane.article.ui.FilterOptions"
+        android:label="FilterOptions" >
+        <action
+            android:id="@+id/filter_nav_overview"
+            app:destination="@id/overviewFragment" />
+    </dialog>
 
 </navigation>
