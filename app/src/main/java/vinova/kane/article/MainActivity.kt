@@ -1,8 +1,7 @@
 package vinova.kane.article
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import vinova.kane.article.R
-import vinova.kane.article.ui.IOnBackPressed
+import vinova.kane.article.util.IOnBackPressed
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

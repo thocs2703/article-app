@@ -61,11 +61,12 @@ dependencies {
     // ViewModel and LiveData
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 
-    // Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
-    implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
-    implementation "com.squareup.retrofit2:converter-scalars:2.5.0"
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.2.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.4.0'
+
 
     // Gson
     implementation 'com.google.code.gson:gson:2.8.6'
@@ -84,8 +85,8 @@ dependencies {
     // SwipeRefreshLayout
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
-    //add paging library
-    implementation "androidx.paging:paging-runtime:3.0.0-alpha04"
-
     implementation 'fr.tvbarthel.blurdialogfragment:lib:2.2.0'
+
+    // paging
+    implementation "androidx.paging:paging-runtime:2.1.0"
 }

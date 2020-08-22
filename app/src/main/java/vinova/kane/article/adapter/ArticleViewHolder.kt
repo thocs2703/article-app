@@ -1,4 +1,4 @@
-package vinova.kane.article.ui
+package vinova.kane.article.adapter
 
 import android.net.Uri
 import android.util.Log
@@ -44,6 +44,7 @@ class ArticleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private fun showArticleData(doc: Doc) {
         this.doc = doc
         if(doc.multimedia.isEmpty()){
+            Log.i("ArticleViewHolder", "Url image article is empty!")
           posterImage.setImageResource(R.drawable.article)
         } else {
             Log.d("ArticleViewHolder", "URL: ${doc.multimedia[0].url}")
