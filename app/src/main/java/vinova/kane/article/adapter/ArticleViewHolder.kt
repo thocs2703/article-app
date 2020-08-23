@@ -44,11 +44,8 @@ class ArticleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private fun showArticleData(doc: Doc) {
         this.doc = doc
         if(doc.multimedia.isEmpty()){
-            Log.i("ArticleViewHolder", "Url image article is empty!")
           posterImage.setImageResource(R.drawable.article)
         } else {
-            Log.d("ArticleViewHolder", "URL: ${doc.multimedia[0].url}")
-            Log.d("ArticleViewHolder", "Web_Url: ${doc.webUrl}")
             doc.multimedia[0].url.let {
                 Glide.with(itemView)
                     .load(IMAGE_URL + it)

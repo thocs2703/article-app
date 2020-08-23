@@ -7,31 +7,26 @@ import android.widget.Button
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.RecyclerView
 import vinova.kane.article.R
-import vinova.kane.article.network.State
+import vinova.kane.article.network.NetworkState
 
-class NetworkStateViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class NetworkStateViewHolder(view: View, retryCallback: () -> Unit) : RecyclerView.ViewHolder(view) {
     private val progressBar = view.findViewById<ProgressBar>(R.id.progress_bar)
     private val retryButton = view.findViewById<Button>(R.id.retry_button)
 
-    fun bind(state: State?) {
-        if (state != null && state == State.LOADING) {
-            progressBar.visibility = View.VISIBLE
-        } else {
-            progressBar.visibility = View.GONE
-        }
+    init {
+        retryButton.setOnClickListener { retryCallback() }
+    }
 
-        if (state != null && state == State.ERROR) {
-            retryButton.visibility = View.VISIBLE
-        } else {
-            retryButton.visibility = View.GONE
-        }
+    fun bind(state: NetworkState?) {
+        progressBar.visibility = if (state == NetworkState.LOADING) View.VISIBLE else View.GONE
+        retryButton.visibility = if (state == NetworkState.ERROR) View.VISIBLE else View.GONE
     }
 
     companion object {
-        fun create(parent: ViewGroup): NetworkStateViewHolder {
+        fun create(parent: ViewGroup, retryCallback: () -> Unit): NetworkStateViewHolder {
             return NetworkStateViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.network_state_item, parent, false)
+                LayoutInflater.from(parent.context).inflate(R.layout.network_state_item, parent, false),
+                retryCallback
             )
         }
     }

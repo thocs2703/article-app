@@ -12,13 +12,15 @@ import java.util.concurrent.TimeUnit
 object Client {
     private const val BASE_URL = "https://api.nytimes.com/svc/search/v2/"
 
-    fun getClient():ApiService {
+    fun getClient(): ApiService {
 
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(logging)
+            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60, TimeUnit.SECONDS)
             .build()
 
         return Retrofit.Builder()

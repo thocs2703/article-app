@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".overview.OverviewFragment">
+    tools:context=".ui.overview.OverviewFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tool_bar"
@@ -24,6 +24,8 @@
         android:layout_marginTop="@dimen/standard_margin"
         android:clipToPadding="false"
         android:padding="@dimen/small_padding"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

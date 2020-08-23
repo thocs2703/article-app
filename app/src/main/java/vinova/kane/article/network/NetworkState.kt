@@ -1,5 +1,5 @@
 package vinova.kane.article.network
 
-enum class State {
+enum class NetworkState {
     LOADING, DONE, ERROR
 }

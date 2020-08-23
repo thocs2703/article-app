@@ -1,4 +1,4 @@
-package vinova.kane.article.filter
+package vinova.kane.article.ui.filter
 
 import android.os.Bundle
 import android.view.LayoutInflater

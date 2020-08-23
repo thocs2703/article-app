@@ -8,7 +8,7 @@
     <fragment
         tools:layout="@layout/fragment_overview"
         android:id="@+id/overviewFragment"
-        android:name="vinova.kane.article.overview.OverviewFragment"
+        android:name="vinova.kane.article.ui.overview.OverviewFragment"
         android:label="OverviewFragment" >
         <action
             android:id="@+id/overview_nav_filter"
@@ -18,7 +18,7 @@
     <dialog
         tools:layout="@layout/filter_dialog"
         android:id="@+id/filterOptions"
-        android:name="vinova.kane.article.filter.FilterOptionsFragment"
+        android:name="vinova.kane.article.ui.filter.FilterOptionsFragment"
         android:label="FilterOptions" >
         <action
             android:id="@+id/filter_nav_overview"
