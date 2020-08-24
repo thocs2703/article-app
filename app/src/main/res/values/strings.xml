@@ -18,8 +18,14 @@
     <string name="fashion_amp_style"><![CDATA[Fashion & Style]]></string>
     <string name="sports">Sports</string>
 
-    <string-array name="sort_order">
-        <item>Oldest</item>
+    <string-array name="sort_order_values">
         <item>Newest</item>
+        <item>Oldest</item>
+    </string-array>
+
+    <string-array name="news_desk">
+        <item>Arts</item>
+        <item>Fashion &amp; Style</item>
+        <item>Sports</item>
     </string-array>
 </resources>

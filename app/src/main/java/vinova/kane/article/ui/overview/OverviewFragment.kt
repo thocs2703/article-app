@@ -16,6 +16,7 @@ import vinova.kane.article.R
 import vinova.kane.article.adapter.ArticleAdapter
 import vinova.kane.article.databinding.FragmentOverviewBinding
 import vinova.kane.article.network.NetworkState
+import vinova.kane.article.ui.filter.FilterOptionsFragmentDirections
 import kotlin.collections.set
 
 class OverviewFragment : Fragment(){
@@ -36,8 +37,7 @@ class OverviewFragment : Fragment(){
 
         viewModel = ViewModelProviders.of(this).get(OverviewViewModel::class.java)
 
-        initAdapter()
-        initState()
+        getFilterOptions()
 
         initToolbar()
 
@@ -113,13 +113,24 @@ class OverviewFragment : Fragment(){
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.filter_bar) {
-            findNavController().navigate(R.id.overview_nav_filter)
+            this.findNavController().navigate(R.id.overview_nav_filter)
             return true
         }
         return super.onOptionsItemSelected(item)
     }
 
+    private fun getFilterOptions(){
+        queries[BEGIN_DATE_PARAM] = arguments?.getString("beginDate") ?: "20100101"
+        queries[SORT_ORDER_PARAM] = arguments?.getString("sortOrder") ?: ""
+        queries[NEWS_DESK_PARAM] = arguments?.getString("newsDesk") ?: ""
+        searchArticleList(queries)
+    }
+
     companion object {
         private const val Q_PARAM = "q"
+        private const val BEGIN_DATE_PARAM = "begin_date"
+        private const val SORT_ORDER_PARAM = "sort"
+        private const val FQ_PARAM = "fq"
+        private const val NEWS_DESK_PARAM = "news_desk"
     }
 }

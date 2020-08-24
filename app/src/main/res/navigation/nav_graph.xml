@@ -13,6 +13,7 @@
         <action
             android:id="@+id/overview_nav_filter"
             app:destination="@id/filterOptions" />
+
     </fragment>
 
     <dialog
