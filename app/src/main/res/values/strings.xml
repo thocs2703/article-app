@@ -15,8 +15,12 @@
     <string name="news_desk_values">News Desk Values</string>
     <string name="save">Save</string>
     <string name="arts">Arts</string>
-    <string name="fashion_amp_style"><![CDATA[Fashion & Style]]></string>
+    <string name="fashion_amp_style">Fashion &amp; Style</string>
     <string name="sports">Sports</string>
+
+    <string name="arts_query">"Arts"</string>
+    <string name="fashion_amp_style_query">"Fashion &amp; Style"</string>
+    <string name="sports_query">"Sports"</string>
 
     <string-array name="sort_order_values">
         <item>Newest</item>
