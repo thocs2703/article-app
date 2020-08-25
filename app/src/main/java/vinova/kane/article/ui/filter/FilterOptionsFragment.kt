@@ -12,8 +12,9 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.os.bundleOf
-import androidx.core.view.get
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import vinova.kane.article.R
 import vinova.kane.article.databinding.FilterDialogBinding
@@ -21,6 +22,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
+import androidx.lifecycle.Observer
 
 class FilterOptionsFragment : DialogFragment() {
     private lateinit var binding: FilterDialogBinding
@@ -29,7 +31,8 @@ class FilterOptionsFragment : DialogFragment() {
     private var newsDesk = ""
     private var newsDeskSet = HashSet<String>()
     private lateinit var sortOrderView: String
-//    private lateinit var viewModel: FilterViewModel
+
+    private lateinit var viewModel: FilterViewModel
 
     private lateinit var preferences: SharedPreferences
     private lateinit var editor: SharedPreferences.Editor
@@ -41,7 +44,8 @@ class FilterOptionsFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-//        viewModel = ViewModelProviders.of(this).get(FilterViewModel::class.java)
+        @Suppress("DEPRECATION")
+        viewModel = ViewModelProviders.of(this).get(FilterViewModel::class.java)
 
         binding = FilterDialogBinding.inflate(inflater)
 
@@ -93,34 +97,21 @@ class FilterOptionsFragment : DialogFragment() {
     }
 
     private fun getBeginDate() {
-        val calendar = Calendar.getInstance()
-        val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH, month)
-            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-            val queryFormat = "yyyyMMdd"
-            val textFormat = "dd/MM/yyyy"
-            beginDate = SimpleDateFormat(queryFormat, Locale.US).format(calendar.time)
-            binding.datePickerEdit.setText(
-                SimpleDateFormat(
-                    textFormat,
-                    Locale.US
-                ).format(calendar.time)
-            )
-
-            editor.putString(BEGIN_DATE, binding.datePickerEdit.text.toString())
+        viewModel.getBeginDate("dd/MM/yyyy")
+        viewModel.beginDate.observe(viewLifecycleOwner, Observer { newBeginDate ->
+            binding.datePickerEdit.setText(newBeginDate)
+            editor.putString(BEGIN_DATE, newBeginDate)
             editor.apply()
-
-            Log.d("FilterOptionsFragment", "EDITOR: $editor")
-        }
+            Log.d("FilterOptionsFragment", "Get begin date from View Model: $newBeginDate")
+        })
 
         binding.datePickerEdit.setOnClickListener {
             context?.let { it1 ->
                 DatePickerDialog(
-                    it1, dateSetListener,
-                    calendar.get(Calendar.YEAR),
-                    calendar.get(Calendar.MONTH),
-                    calendar.get(Calendar.DAY_OF_MONTH)
+                    it1, viewModel.dateSetListener,
+                    viewModel.calendar.get(Calendar.YEAR),
+                    viewModel.calendar.get(Calendar.MONTH),
+                    viewModel.calendar.get(Calendar.DAY_OF_MONTH)
                 ).show()
             }
         }

@@ -1,35 +1,36 @@
 package vinova.kane.article.ui.filter
 
-import android.content.Context
+import android.app.DatePickerDialog
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import vinova.kane.article.PreferencesProvider
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FilterViewModel: ViewModel() {
-    private lateinit var preferencesProvider: PreferencesProvider
+    private val _beginDate = MutableLiveData<String>()
+    val beginDate: LiveData<String>
+    get() = _beginDate
 
-//    private var _beginDate = MutableLiveData<String>()
-//    var beginDate: LiveData<String> = _beginDate
-//    private var _sortOrder = MutableLiveData<String>()
-//    var sortOrder: LiveData<String> = _sortOrder
-//    private var _newsDesk = MutableLiveData<String>()
-//    var newsDesk: LiveData<String> = _newsDesk
+    private val _sortOrder = MutableLiveData<String>()
+    var sortOrder: LiveData<String> = _sortOrder
 
-    var beginDate: String = ""
-    var sortOrder: String = ""
-    var newsDesk: String = ""
+    private val _newsDesk = MutableLiveData<String>()
+    var newsDesk: LiveData<String> = _newsDesk
 
-    fun putData(context: Context){
-        preferencesProvider = PreferencesProvider(context)
-        preferencesProvider.putString(BEGIN_DATE, beginDate)
-        preferencesProvider.putString(SORT_ORDER, sortOrder)
-        preferencesProvider.putString(NEWS_DESK, newsDesk)
-    }
+    lateinit var calendar: Calendar
+    lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
 
-    fun getData() {
-        beginDate = preferencesProvider.getString(BEGIN_DATE) ?: ""
-        sortOrder = preferencesProvider.getString(SORT_ORDER) ?: ""
-        newsDesk = preferencesProvider.getString(NEWS_DESK) ?: ""
+    fun getBeginDate(formatDate: String) {
+        calendar = Calendar.getInstance()
+        dateSetListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH, month)
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            _beginDate.value = SimpleDateFormat(formatDate, Locale.US).format(calendar.time)
+            Log.d("FilterViewModel", "Begin Date: ${beginDate.value}")
+        }
     }
 
     override fun onCleared() {
@@ -37,9 +38,4 @@ class FilterViewModel: ViewModel() {
         Log.i("FilterViewModel", "FilterViewModel destroyed!")
     }
 
-    companion object{
-        const val BEGIN_DATE = "BEGIN_DATE"
-        const val SORT_ORDER = "SORT_ORDER"
-        const val NEWS_DESK = "NEWS_DESK"
-    }
 }
